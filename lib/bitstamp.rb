@@ -40,6 +40,11 @@ module Bitstamp
 
     @@transactions ||= Bitstamp::UserTransactions.new
   end
+  
+  def self.withdrawal_requests
+    self.sanity_check!
+    response_body = Bitstamp::Net.post('/v2/withdrawal-requests',options)
+  end
 
   def self.transactions(currency_pair = "btcusd")
     return Bitstamp::Transactions.from_api(currency_pair)
