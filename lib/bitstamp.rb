@@ -63,6 +63,33 @@ module Bitstamp
       return response_body
     end
   end
+  
+  def self.withdraw_ripple(options = {})
+    self.sanity_check!
+    if options[:amount].nil? || options[:address].nil?
+      raise MissingConfigExeception.new("Required parameters not supplied, :amount, :address")
+    end
+    response_body = Bitstamp::Net.post('/ripple_withdrawal',options).body_str
+    if response_body != 'true'
+      return JSON.parse response_body
+    else
+      return response_body
+    end
+  end
+  
+  def self.withdraw_litecoin(options = {})
+    self.sanity_check!
+    if options[:amount].nil? || options[:address].nil?
+      raise MissingConfigExeception.new("Required parameters not supplied, :amount, :address")
+    end
+    response_body = Bitstamp::Net.post('/litecoin_withdrawal',options).body_str
+    if response_body != 'true'
+      return JSON.parse response_body
+    else
+      return response_body
+    end
+  end
+  
   def self.bitcoin_deposit_address
     # returns the deposit address
     self.sanity_check!
