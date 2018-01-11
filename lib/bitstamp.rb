@@ -69,7 +69,7 @@ module Bitstamp
     if options[:amount].nil? || options[:address].nil?
       raise MissingConfigExeception.new("Required parameters not supplied, :amount, :address")
     end
-    response_body = Bitstamp::Net.post('/xrp_withdrawal',options)
+    response_body = Bitstamp::Net.post('/v2/xrp_withdrawal',options)
     if response_body != 'true'
       return JSON.parse response_body
     else
@@ -82,7 +82,7 @@ module Bitstamp
     if options[:amount].nil? || options[:address].nil?
       raise MissingConfigExeception.new("Required parameters not supplied, :amount, :address")
     end
-    response_body = Bitstamp::Net.post('/litecoin_withdrawal',options)
+    response_body = Bitstamp::Net.post('/v2/ltc_withdrawal/',options)
     if response_body != 'true'
       return JSON.parse response_body
     else
