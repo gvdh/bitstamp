@@ -7,8 +7,8 @@ module Bitstamp
 
     def create(options = {})
       currency_pair = options[:currency_pair] || "btcusd"
-      path = (options[:type] == Bitstamp::Order::SELL ? "/v2/sell/market/" : "/v2/buy/market/")
-      Bitstamp::Helper.parse_object! Bitstamp::Net::post(path, options).to_str, self.model
+      path = (options[:type] == Bitstamp::Order::SELL ? "/v2/sell/market/#{currency_pair}" : "/v2/buy/market/#{currency_pair}")
+      puts Bitstamp::Helper.parse_object! Bitstamp::Net::post(path, options).to_str, self.model
     end
 
     def sell(options = {})
@@ -18,6 +18,7 @@ module Bitstamp
 
     def buy(options = {})
       options.merge!({type: Bitstamp::Order::BUY})
+      puts options
       self.create options
     end
 
