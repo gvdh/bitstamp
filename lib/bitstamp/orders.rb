@@ -7,7 +7,7 @@ module Bitstamp
 
     def create(options = {})
       currency_pair = options[:currency_pair] || "btcusd"
-      path = (options[:type] == Bitstamp::Order::SELL ? "/v2/sell/#{currency_pair}" : "/v2/buy/#{currency_pair}")
+      path = (options[:type] == Bitstamp::Order::SELL ? "/v2/sell/market/" : "/v2/buy/market/")
       Bitstamp::Helper.parse_object! Bitstamp::Net::post(path, options).to_str, self.model
     end
 
